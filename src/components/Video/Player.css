@@ -1,0 +1,44 @@
+.player{
+    margin: auto;
+    display: flex;
+    height: calc(100dvh - 7rem);
+    max-width: 1600px;
+}
+.player>div:nth-child(1){
+    flex: 1.8;
+    order: 2;
+}
+.player>div:nth-child(1)>div{
+    padding: 1rem;
+}
+.player>div:nth-child(2){
+    flex: 1;
+    order: 1;
+    align-self: stretch;
+    overflow-y: scroll;
+    padding:  1rem;
+    background-color: #ededed;
+}
+.player iframe{
+    border: 10px solid rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0);
+}
+
+.player_course_content{
+    margin: 0 -1rem;
+    padding: 1rem;
+    cursor: pointer;
+    background-color: rgb(223, 223, 223);
+    transition: all 200ms ease-in;
+}
+.player_course_content:nth-child(2n){
+    background-color: rgb(232, 230, 230);
+
+}
+.player_course_content:nth-child(2n-1){
+    background-color: rgb(223, 223, 223);
+
+}
+.player_course_content:hover{
+    background-color: rgb(148, 169, 190);
+}

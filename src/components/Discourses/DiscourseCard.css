@@ -1,0 +1,27 @@
+.discourse_card_container{
+    padding: 0.5rem;
+    width: fit-content;
+    margin-top: 1rem;
+    border-radius: 1rem;
+}
+.discourse_card{
+    padding: 1rem;
+    background: linear-gradient(to bottom, #ffffff,  #badfff);
+    display: flex;
+    max-width: 1000px;
+    height: 300px;
+    gap: 2rem;
+    align-items: flex-start;
+    overflow: hidden;
+}
+.discourse_card>img{
+    height: 100%;
+    object-fit: contain;
+}
+.discourse_card>div>h1{
+    font-weight: semi-bold;
+    font-style: italic;
+}
+.discourse_card>div>p{
+    margin-bottom: 1rem;
+}

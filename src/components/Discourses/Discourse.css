@@ -1,0 +1,12 @@
+.discourse{
+    padding: 0  1rem;
+}
+.discourse>h1{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 3rem;
+}
+.discourse>div{
+    width: fit-content;
+    margin: 1rem auto;
+}
