@@ -2,29 +2,22 @@ import { useState, useEffect } from "react";
 import "./Player.css";
 import PlayerCourse from "./PlayerCourse";
 import LoadingSpinner from "./LoadingSpinner";
+import { useLocation} from "react-router-dom";
 
 const Player = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
 
+	const local= useLocation();
+	const {course}= local.state
+
+	//console.log(course.Name)
+
   useEffect(() => {
-    fetch('https://api/course/courseOne', {
-      method: 'GET', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: '93792374974',
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setVideos(data);
-        setCurrentVideo(data[0].videoUrl);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+  	
+	setVideos(course.Content)
+	setCurrentVideo(course.Content[0])
+
   }, []);
   
 
@@ -33,14 +26,14 @@ const Player = () => {
       <div className="player">
         <div>
           <iframe
-            src={currentVideo}
+            src={`https://player.vimeo.com/video/${currentVideo}?h=3735cfbee6&title=0&byline=0&portrait=0`}
             width="100%"
             height="380"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen
           ></iframe>
           <div>
-            <h2>Video Title</h2>
+            <h2>{course.Name}</h2>
             <hr />
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
@@ -56,10 +49,10 @@ const Player = () => {
             {videos.map((video, index) => (
               <PlayerCourse
                 key={index}
-                videoTitle={video.title}
+                videoTitle={course.Name}
                 videoDuration={video.duration}
                 setVideo={setCurrentVideo}
-                videoLink={video.videoUrl}
+                videoLink={video}
               />
             ))}
           </div>
@@ -67,7 +60,8 @@ const Player = () => {
       </div>
     ) : (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <LoadingSpinner/>
+     		Video Screen
+	    <LoadingSpinner/>
     </div>
     )
   );
