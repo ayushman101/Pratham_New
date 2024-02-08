@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const DiscourseCard = ({ img, id, data }) => {
 
 	id=1;
-
+	
 return (
     <div className="discourse_card_container">
       <div className="discourse_card">
@@ -25,9 +25,11 @@ return (
 	  <p>
 	  	Price: {data.Price} 
 	  </p>
+	  <Link to={`/coursePayment`} state={{course: data}}>
           <Button variant="contained" color="success">
             Register
           </Button>
+	</Link>
         </div>
       </div>
     </div>

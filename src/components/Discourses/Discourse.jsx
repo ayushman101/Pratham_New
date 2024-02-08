@@ -14,10 +14,12 @@ const Discourse = () => {
 			method: 'GET',
 			headers:  {
 				Accept:`application/json`,
-				Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NTViMDRkMDVmNzI3ZmZiNzNhMmQ5YTMiLCJlbWFpbCI6InNzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic2lkIiwiaWF0IjoxNzAwNDYzODI0LCJleHAiOjE3MDU2NDc4MjR9.0KTKoBSeKpEHXhRDbqB-yi3fzLKSZp7U1J-REFyP6X0`
+				Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NWFmZjhjZDJlOTA5MGM1MzQ0Yjc2YTUiLCJlbWFpbCI6InNzZnNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzc2ZzIiwiaWF0IjoxNzA2MDMxMzk0LCJleHAiOjE3MjE1ODMzOTR9.9iHqhuEEnr4UiONEUrLT34o1egAckjJy3QCUNfKAx8A`
 			},
 		}).then(response=> response.json())
 		.then(data=> {
+			console.log(data)
+			console.log("after response")
 			setCourses(data);
 			console.log(data[0].Name)
 		}).catch((error)=> {
@@ -36,7 +38,7 @@ const Discourse = () => {
 		<div>
 		{
 		   courses.map(course => (
-			<DiscourseCard img={img1} id={course._id} data={course} />
+			<DiscourseCard img={`http://localhost:3001/${course.ImgPath}`} id={course._id} data={course} />
 		   ))
 		}
 		</div>

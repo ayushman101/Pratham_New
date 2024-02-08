@@ -3,14 +3,16 @@ import "./Home.css";
 import homeImage from "../../assets/Divine-mother-22.08.2023-OK.jpg";
 import homeCarouselImage from "../../assets/BHAJAGOVINDAM-OK.png";
 import Carousel from "react-material-ui-carousel";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="home">
       <div className="home_image">
-        <Button variant="contained" sx={{ width: "13rem" }}>
+        <Button variant="contained" sx={{ width: "13rem" }} onClick={()=>{navigate("/login")}}>
           LOGIN
         </Button>
-        <Button variant="contained" sx={{ width: "13rem" }} color="success">
+        <Button variant="contained" sx={{ width: "13rem" }} color="success" onClick={()=>{navigate("/register")}}>
           Become a member
         </Button>
       </div>
