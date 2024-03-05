@@ -4,6 +4,7 @@ import Checkout from './Checkout'
 import {useLocation } from 'react-router-dom';
 import {Elements} from '@stripe/react-stripe-js';
 
+import isTokenExpired from "../middlewares/isTokenExpired";
 
 const Payment = () => {
 	
@@ -20,14 +21,12 @@ const Payment = () => {
 	useEffect(()=>{
 		
 		console.log("Inside New Payment.jsx")
+	
+		const tokenKey= "prasthan_yatna_jwt";
 
-		//const body= {
-		//	course: course
-		//}
+		if(!isTokenExpired(tokenKey)){
 
-		//const headers= {
-		//	"Content-Type": "application/json"
-		//}
+		const token = localStorage.getItem(tokenKey)
 
 		fetch ("http://localhost:3001/api/course/payment",{
 			method: 'POST',
@@ -35,7 +34,7 @@ const Payment = () => {
 
 				"Content-Type":"application/json",
                                 Accept:`application/json`,
-                                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NWFmZjhjZDJlOTA5MGM1MzQ0Yjc2YTUiLCJlbWFpbCI6InNzZnNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzc2ZzIiwiaWF0IjoxNzA2MDMxMzk0LCJleHAiOjE3MjE1ODMzOTR9.9iHqhuEEnr4UiONEUrLT34o1egAckjJy3QCUNfKAx8A`
+                                Authorization:`Bearer ` + token,
                         },
 
 			body: JSON.stringify({
@@ -50,6 +49,9 @@ const Payment = () => {
 
 			setClientSecret(clientSecret);
 		})
+
+	
+		}
 	},[])
 
 	return (

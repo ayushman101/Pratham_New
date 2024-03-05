@@ -28,7 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const Register = () => {
+
+
+	const navigate = useNavigate();	
+	
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,12 +56,9 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //console.log(event.target.username.value)
-//	const registrationForm = document.getElementById('registrationForm');
-//	const formData =  new FormData(registrationForm)
-//	  console.log(formData)
-	  //TODO: Work on Navigate to other page
-	  //TODO: Save the token to cache
+
+	   var flag=0;
+
 	fetch('http://localhost:3001/api/user/register/v1',{
 		method: 'POST',
 		mode: 'cors',
@@ -70,16 +73,30 @@ const Register = () => {
 			'Content-Type': 'application/json',
 		},
 	}).then(response=> {
-		console.log(response)
 		if(response.status===500)
-			alert("Wrong Credentials")
-		else
+		{
+			flag=1;
+		}else
 			alert("Registration Successfull!")
 		return	response.json()
 	})
 	  .then(data=> {
-		console.log(data.token);
+
+		  if(flag){
+			
+			alert("Wrong Credentials : " + Object.keys(data.keyValue) + " \n Try Registering Again")
+			console.log(data.keyValue);
+		  }else{
+			
+			  console.log(data.token)
+			  // Assuming `token` is your JWT received from the server
+				
+			  localStorage.setItem('prasthan_yatna_jwt', data.token);
+			  navigate("/");
+		  }
+
 	  }).catch((error)=>{
+		  
 		console.log('Error in handle Submit: ', error);
 	  });
   };
