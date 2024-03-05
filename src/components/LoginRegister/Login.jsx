@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, TextField, Grid, Paper, Typography, Link, Fade, makeStyles } from '@material-ui/core';
 import {useNavigate} from 'react-router-dom'
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
 
   
+  const navigate= useNavigate();	
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,7 +47,6 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-	  const navigate= useNavigate();	
 	  fetch('http://localhost:3001/api/user/login', {
 		
 		  method: 'POST',
@@ -66,16 +67,20 @@ const Login = () => {
 	  }).then(data=>{
 		
 		  if(data.token){
-			localStorage.setItem('myData', JSON.stringify({
-  				token: data.token
-			}));
+			localStorage.setItem('prasthan_yatna_jwt', data.token);
+
+			navigate("/");
 			  //const mydata= JSON.parse(localStorage.getItem('myData'));
 			  //console.log(mydata.token)
 			  
 
 		  }
-		  else
-			  alert(data)
+		  else{
+			  
+			  console.log(data.keyValue)
+			alert("wrong credentials : " + data.keyValue + "\n try Again")
+
+		  }
 
 	  }).catch(error=>{
 		console.log('Error in Login: ',error)
