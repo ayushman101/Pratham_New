@@ -5,13 +5,43 @@ import homeCarouselImage from "../../assets/BHAJAGOVINDAM-OK.png";
 import Carousel from "react-material-ui-carousel";
 import { useNavigate } from "react-router-dom";
 import isTokenExpired  from "../middlewares/isTokenExpired"
+import {useEffect,useState} from 'react';
+
+
 const Home = () => {
 
+
+  const [trendCourses, setTrendCourses] = useState([]);
   const tokenKey = "prasthan_yatna_jwt"
 
   var bl = isTokenExpired(tokenKey)
 
+	
+
   const navigate = useNavigate();
+
+
+ useEffect( () => {
+	
+	 fetch('http://localhost:3001/api/trend_course', {
+		method:'GET',
+		 headers: {
+			Accept: `application/json`,
+		 },
+	 }).then(response=> response.json())
+	 .then(data => {
+
+		console.log(data)
+		 setTrendCourses(data)
+		 console.log(data[0].ImgPath);
+	 }).catch((error)=> {
+		
+		 console.log('Error in getting trend courses',error);
+	 });
+
+ },[])
+	
+
   return (
     <div className="home">
       <div className="home_image">
@@ -25,8 +55,13 @@ const Home = () => {
       <div className="home_grid">
         <div className="home_grid_carousel">
           <Carousel interval={3000}>
-            <img src={homeImage} alt="" width={"100%"} />
-            <img src={homeCarouselImage} alt="" width={"100%"} />
+        {
+		trendCourses.map(trendCourse => (
+			
+	  		<img src={`http://localhost:3001/${trendCourse.ImgPath}`} alt="" width={"100%"} />
+		))
+	} 
+
           </Carousel>
         </div>
         <div>
@@ -46,9 +81,12 @@ const Home = () => {
             Attend Class
           </Button>
         </div>
-        <img src={homeCarouselImage} alt="" className="home_carousel_image" />
-        <img src={homeCarouselImage} alt="" className="home_carousel_image" />
-        <img src={homeCarouselImage} alt="" className="home_carousel_image" />
+	{
+		trendCourses.map( trendCourse =>(
+					
+        <img src={`http://localhost:3001/${trendCourse.ImgPath}`} alt="" className="home_carousel_image" />
+		))
+	}
       </div>
       <div className="home_para">
         <h2>Founder cum Director&apos;s message</h2>
