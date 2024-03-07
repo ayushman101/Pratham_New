@@ -6,6 +6,7 @@ import Carousel from "react-material-ui-carousel";
 import { useNavigate } from "react-router-dom";
 import isTokenExpired  from "../middlewares/isTokenExpired"
 import {useEffect,useState} from 'react';
+import {Link} from "react-router-dom";
 
 
 const Home = () => {
@@ -57,8 +58,9 @@ const Home = () => {
           <Carousel interval={3000}>
         {
 		trendCourses.map(trendCourse => (
-			
+			<Link to={`/discourses/${trendCourse.courseId}`}  state={{course: trendCourse}}>
 	  		<img src={`http://localhost:3001/${trendCourse.ImgPath}`} alt="" width={"100%"} />
+		</Link>
 		))
 	} 
 
@@ -67,9 +69,8 @@ const Home = () => {
         <div>
           <h2>
             Upcoming Discourse: <br />
-            Divine Mother
           </h2>
-          <Button variant="contained" sx={{ width: "80%" }}>
+          <Button variant="contained" sx={{ width: "80%" }} onClick={()=>{navigate("/register")}}>
             Register Now
           </Button>
           <Button
@@ -84,7 +85,10 @@ const Home = () => {
 	{
 		trendCourses.map( trendCourse =>(
 					
-        <img src={`http://localhost:3001/${trendCourse.ImgPath}`} alt="" className="home_carousel_image" />
+	<Link to= {`/discourses/${trendCourse.courseId}` } state={{course: trendCourse}}>
+        <img src={`http://localhost:3001/${trendCourse.ImgPath}`} alt="" className="home_carousel_image" />	
+	</Link>
+
 		))
 	}
       </div>
