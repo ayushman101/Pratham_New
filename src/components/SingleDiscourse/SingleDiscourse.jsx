@@ -63,24 +63,20 @@ const SingleDiscourse = () => {
         <p>20 hours</p>
         <div>
 
-	<StripeCheckout stripeKey="pk_test_51Oabj1SGz6Nn6PCdsCVyytaRC2lyy9nAHxt9bsVAQBIBS1Tcj2oorP6MAq6WrrqeR3izJ6gQSlkYhXngVbI9Q0sO00G4tdMXLb" token={makePayment} name={course.Name} amount={course.Price * 100}>	
-          <Button
+	<Link to={`/coursePayment`} state = {{course:course}}>
+	<Button
             variant="outlined"
             style={{ marginTop: "1rem", width: "200px" }}
-          >
+        	  >
             Register
           </Button>
-
-	</ StripeCheckout>
+	</Link>
 
 	  <Link to={`/discourses/video`} state={{course: course}}>
           <Button
             variant="outlined"
             style={{ marginTop: "1rem", width: "200px" }}
             color="success"
-          //  onClick={() => {
-            //  navigate("/discourses/video");
-           // }}
           >
             Go to course
           </Button>
