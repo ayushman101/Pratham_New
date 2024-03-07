@@ -3,11 +3,15 @@ import {loadStripe} from '@stripe/stripe-js';
 import Checkout from './Checkout'
 import {useLocation } from 'react-router-dom';
 import {Elements} from '@stripe/react-stripe-js';
-
+import {useNavigate} from 'react-router-dom';
 import isTokenExpired from "../middlewares/isTokenExpired";
+
+
 
 const Payment = () => {
 	
+	const navigate=useNavigate();
+
 	const [stripePromise, setStripePromise]= useState(loadStripe("pk_test_51Oabj1SGz6Nn6PCdsCVyytaRC2lyy9nAHxt9bsVAQBIBS1Tcj2oorP6MAq6WrrqeR3izJ6gQSlkYhXngVbI9Q0sO00G4tdMXLb"));
 	const [clientSecret, setClientSecret]= useState("");
 
@@ -20,7 +24,6 @@ const Payment = () => {
 
 	useEffect(()=>{
 		
-		console.log("Inside New Payment.jsx")
 	
 		const tokenKey= "prasthan_yatna_jwt";
 
@@ -51,7 +54,13 @@ const Payment = () => {
 		})
 
 	
+		} else {
+			alert("YOU ARE NOT LOGGED IN!! \n REDIRECTING")
+			console.log("User not logged in!!!")
+			navigate("/register");
 		}
+		
+
 	},[])
 
 	return (
