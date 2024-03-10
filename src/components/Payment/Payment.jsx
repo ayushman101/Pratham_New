@@ -51,6 +51,9 @@ const Payment = () => {
 			console.log(clientSecret);
 
 			setClientSecret(clientSecret);
+			
+			localStorage.setItem("prasthan_yatna_courseId", course._id);
+
 		})
 
 	

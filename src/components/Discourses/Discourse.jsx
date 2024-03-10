@@ -2,9 +2,11 @@ import "./Discourse.css";
 import DiscourseCard from "./DiscourseCard";
 import {useState, useEffect} from 'react';
 import isTokenExpired from "../middlewares/isTokenExpired";
+import {useNavigate} from 'react-router-dom'
 
 const Discourse = () => {
-	
+
+	const navigate = useNavigate();
 	const [courses, setCourses]= useState([]);
 	useEffect(()=>{
 
@@ -35,6 +37,9 @@ const Discourse = () => {
 			console.log('Error in Discourse useEffect: ',error);
 		});
 		
+		}else {
+			alert("Please Login or Register")
+			navigate('/login');
 		}
 
 	},[])

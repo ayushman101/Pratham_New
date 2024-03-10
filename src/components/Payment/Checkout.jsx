@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-
+import {useLocation} from 'react-router-dom';
 
 const Checkout= ()=>{
 
